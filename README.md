@@ -2,7 +2,7 @@
 
 ## Assignment 1
 
-Assignment 1 was not difficult for me because I had already completed it. The only thing that perplexed me was determining what I needed to do, but the instructor clarified that for me. The code should be easy to comprehend. Because of the complex code, maintenance and debugging are difficult and expensive. To improve clarity and consistency, the sample series also makes use of coding style conventions. Because I am unfamiliar with the Hello World Program, I chose Python as a programming language. I also added some coding and am interested to see if it works. It is a motivation in the programming industry to create software programs easy to maintain.
+1st Assignment I was unsure how to complete the assignment, but the researcher at https://www.w3schools.com/python/default.asp was extremely helpful and demonstrated how to calculate my BMI. On another website, I use the basic categories chart and make small tweaks to most of the decimals. Calculate the assigned bmi as well: weight/(height * 2) * 703 It greatly aids in the wiki index of body mass, and learning how to break it down in an algorithm in the source code provided in the martial is akin to going on a treasure hunt to find the information. It took me a while to understand Python 3, which is very different from other classes I've taken in the past.
 
 ## Assignment 2
 
