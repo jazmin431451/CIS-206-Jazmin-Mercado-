@@ -1,59 +1,21 @@
-<?xml version="1.0"?>
-<flowgorithm fileversion="3.0">
-    <attributes>
-        <attribute name="name" value=""/>
-        <attribute name="authors" value="jazmi"/>
-        <attribute name="about" value=""/>
-        <attribute name="saved" value="2023-01-19 01:45:32 PM"/>
-        <attribute name="created" value="amF6bWk7SkFaTUlOOzIwMjMtMDEtMTg7MTI6NTU6NTMgUE07MjI3OA=="/>
-        <attribute name="edited" value="amF6bWk7SkFaTUlOOzIwMjMtMDEtMTk7MDE6NDU6MzIgUE07MjsyMzgy"/>
-    </attributes>
-    <function name="Main" type="None" variable="">
-        <parameters/>
-        <body>
-            <declare name="weight" type="Integer" array="False" size=""/>
-            <declare name="height" type="Integer" array="False" size=""/>
-            <declare name="bmi" type="Integer" array="False" size=""/>
-            <output expression="&quot;Please Enter height in feet and inches&quot;" newline="True"/>
-            <input variable="height"/>
-            <output expression="&quot;also please enter your weight in lbs&quot;" newline="True"/>
-            <input variable="weight"/>
-            <assign variable="bmi" expression="weight/(height * 2) * 703"/>
-            <if expression="bmi &lt;16">
-                <then>
-                    <output expression="&quot;severely underweight&quot;" newline="True"/>
-                </then>
-                <else>
-                    <if expression="bmi &gt;= 16 and bmi &lt; 18.5">
-                        <then>
-                            <output expression="&quot;underweight&quot;" newline="True"/>
-                        </then>
-                        <else>
-                            <if expression="bmi &gt;= 18.5 and bmi &lt; 25">
-                                <then>
-                                    <output expression="&quot;healthy&quot;" newline="True"/>
-                                </then>
-                                <else>
-                                    <if expression="bmi &gt;= 25 and bmi &lt; 30">
-                                        <then>
-                                            <output expression="&quot;overweight&quot;" newline="True"/>
-                                        </then>
-                                        <else>
-                                            <if expression="bmi &gt;= 30">
-                                                <then>
-                                                    <output expression="&quot;obese&quot;" newline="True"/>
-                                                </then>
-                                                <else/>
-                                            </if>
-                                        </else>
-                                    </if>
-                                </else>
-                            </if>
-                        </else>
-                    </if>
-                </else>
-            </if>
-            <output expression="&quot;your bmi is&quot; &amp;bmi &amp; &quot;and you are&quot; &amp;bmi" newline="True"/>
-        </body>
-    </function>
-</flowgorithm>
+print("please enter your name")
+name = input()
+print("Please Enter height in feet and inches")
+height = int(input())
+print("also please enter your weight in lbs")
+weight = int(input())
+bmi = float(weight) / (height * 2) * 703
+if bmi < 16:
+    print(name + " is severely underweight (bmi= " + str(bmi) + ")")
+else:
+    if bmi >= 16 and bmi < 18.5:
+        print(name + " is  underweight (bmi= " + str(bmi) + ")")
+    else:
+        if bmi >= 18.5 and bmi < 25:
+            print(name + " is healthy (bmi= " + str(bmi) + ")")
+        else:
+            if bmi >= 25 and bmi < 30:
+                print(name + " is overweightt (bmi= " + str(bmi) + ")")
+            else:
+                if bmi >= 30:
+                    print(name + " is obese (bmi= " + str(bmi) + ")")
