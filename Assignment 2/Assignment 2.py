@@ -1,3 +1,27 @@
+"""This program converts in this program and determine your body mass index.
+
+input:
+     your name, weight, and height
+    
+output:
+    your weight in lbs
+    your height in feet 
+    additional inches
+    one decimal place
+example:
+    enter your weight and height:
+    130 and 5'3 ft
+    resulting from mass in kilograms and height in metres is healthy bmi= 23.025951121189216
+Todo:
+    * ask there weight in lbs and their height in feet and inches 
+    * calculate and display their BMI and also include the display the value range for underweight, normal and overweight.
+    *also make sure the sorce in BMI is in range recommendations.
+References:
+    *https://www.w3schools.com/python/default.asp
+    *https://en.wikipedia.org/wiki/Body_mass_index
+    *https://www.mathsisfun.com/metric-imperial-conversion-charts.html
+ """  
+
 # Constants for height and weight conversions
 FEET_TO_INCHES = 12
 LBS_TO_KGS = 0.453592
