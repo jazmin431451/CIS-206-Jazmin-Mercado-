@@ -82,55 +82,33 @@ def display_bmi(name, bmi, classification):
     if not isinstance(name, str) or not isinstance(bmi, float) or not isinstance(classification, str):
         raise ValueError("Name must be a string, BMI must be a positive number, and classification must be a string.")
     if bmi <= 0:
-raise ValueError("BMI must be a positive number.")
-if classification not in ["underweight", "healthy", "overweight"]:
-raise ValueError("Classification must be 'underweight', 'healthy', or 'overweight'.")
+    raise ValueError("BMI must be a positive number.")
+    if classification not in ["underweight", "healthy", "overweight"]:
+    raise ValueError("Classification must be 'underweight', 'healthy', or 'overweight'.")
 
 print(f"{name}'s BMI is {bmi} and they are classified as {classification}.")
 
 def display_bmi_table():
 """Display a table of BMI values for various weight and height combinations.
 """
-print("BMI Table:")
-print("Weight (lbs) | Height (in) | BMI")
-for weight in range(100, 251, 10):
-for height in range(58, 77, 2):
-bmi = calculate_bmi(weight, height)
-classification = classify_bmi(bmi)
-print(f"{weight} | {height} | {bmi} ({classification})")
+    print("BMI Table:")
+    print("Weight (lbs) | Height (in) | BMI")
+    for weight in range(100, 251, 10):
+    for height in range(58, 77, 2):
+    bmi = calculate_bmi(weight, height)
+    classification = classify_bmi(bmi)
+    print(f"{weight} | {height} | {bmi} ({classification})")
 
 def main():
+    """Runs the main program logic."""
 try:
-name = input("Please enter your name: ")
-weight_pounds = float(input("Please enter your weight in lbs: "))
-height_feet = int(input("Enter your height in feet: "))
-height_inches = int(input("Enter any additional inches: "))
-height_inches = convert_height_inches(height_feet, height_inches)
-b
-mi = calculate_bmi(weight_pounds, height_inches)
-classification = classify_bmi(bmi)
-display_bmi(name, bmi, classification)
-    while True:
-        choice = input("Do you want to calculate another BMI? (Y/N) ")
-        if choice.upper() == "Y":
-            weight_pounds = float(input("Please enter your weight in lbs: "))
-            height_feet = int(input("Enter your height in feet: "))
-            height_inches = int(input("Enter any additional inches: "))
-
-            height_inches = convert_height_inches(height_feet, height_inches)
-            bmi = calculate_bmi(weight_pounds, height_inches)
-            classification = classify_bmi(bmi)
-            display_bmi(name, bmi, classification)
-        elif choice.upper() == "N":
-            break
-        else:
-            print("Invalid input. Please enter 'Y' or 'N'.")
-
-    display_bmi_table()
-
-except ValueError as e:
-    print(f"Error: {e}")
-except Exception as e:
-    print(f"An unknown error occurred: {e}")
-if name == "main":
+    name = get_user_name()
+    height = convert_height_user(height_feet=any, height_inches=any)
+    weight = weight_bmi(weight_pounds=any, height_user=any)
+    display_results(name=any,bmi=any, classification=any)
+except:
+    print("Unexpected error.")
+    print("Error:", sys.exc_info()[1])
+    print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename) 
+    print("Line: ", sys.exc_info()[2].tb_lineno)
 main()
