@@ -23,9 +23,8 @@ References:
 import sys
 def get_user_name():
     """Gets user's name.
-
-    Args: None
-
+    Args: 
+        None
     Returns:
         str: user's name
     """
@@ -59,75 +58,99 @@ def convert_height_user(height_feet, height_inches):
     height = (height_feet * 12) + height_inches
     return height
 
-def calculate_bmi(weight_pounds, height_user):
+def calculate_weight(weight_pounds, height_user):
     """Calculate BMI using weight in pounds and height in inches.
     Parameters:
-        weight_pounds (int): Weight in pounds.
-        height_user (int): Height in inches.
+        weight_pounds str(int): Weight in pounds.
+        height_user str(int): Height in inches.
 
     Returns:
         int: BMI rounded to one decimal place.
     Raises:
         ValueError: If weight_pounds or height_inches are not positive numbers. 
         ValueError: If bmi is not a positive number.
-
     """
-    weight_pounds = int(input("please enter your weight in pounds:"))
+    weight_pounds = int(input("please enter your weight in pounds: "))
     height_user= int()
-    weight_pounds = int()
-    if not isinstance(weight_pounds, int, float) or not isinstance(height_user, int):
-        raise ValueError("Weight must be given in pounds as height must be given in feet and inches.")
-    if weight_pounds <= 0 or height_user <= 0:
-        raise ValueError("Weight and height must be positive numbers.")
-    weight_pounds = 0.45359237
     weight_pounds = (weight_pounds / (height_user ** 2)) * 703
+    weight_pounds = 0.45359237 
+    if not isinstance(weight_pounds, int, float) or not isinstance(height_user, int):
+        raise ValueError("If weight_pounds or height_inches are not positive numbers.")
+    if weight_pounds <= 0 or weight_pounds <=0:
+        raise ValueError("Weight and height must be positive numbers.")    
     return weight_pounds
+def table_BMI(bmi):
+    """table BMI as underweight, healthy, or overweight.
 
+    Parameters:
+        bmi (float): BMI value.
+
+    Returns:
+        str: Classification of BMI.
+
+    Raises:
+        ValueError: If bmi is not a positive number.
+    """
+    if not isinstance(bmi, float):
+        raise ValueError("BMI must be a number.")
+    if bmi <= 0:
+        raise ValueError("BMI must be a positive number.")
+
+    if bmi < 18.5:
+        return "underweight"
+    elif bmi < 25:
+        return "healthy"
+    else:
+        return "overweight"
+    
 def display_results(name, bmi):
     """Display BMI and Classification for a given name.
 
     Args:
-        name (str): Name of person.
+        name (str): Name to person.
         bmi (float): BMI value.
-        classification (str): Classification of BMI.
+        c
     Returns:
         None
     Raises:
-        AssertionError: Height must be given in whole numbers of feet and inches.
+        AssertionError: Height must be given in whole numbers to feet and inches.
         AssertionError: Weight must be given in pounds as height must be given in feet and inches.
-        AssertionError: Height must be given in whole numbers of feet and inches
+        AssertionError: Height must be given in whole numbers to feet and inches
     """
     name = input("Please enter your name: ")
     bmi = float(input("Please enter your weight in lbs: "))
-    if bmi < 18.5:
-        print(name + " is Underweight (bmi= " + str(bmi) + ")")
-    elif bmi >= 18.5 and bmi < 25:
-        print(name + " is Healthy (bmi= " + str(bmi) + ")")
-    elif bmi >= 25 and bmi < 30:
-        print(name + " is Overweight (bmi= " + str(bmi) + ")")
-    else:
-        print (name + " is obese (bmi= " + str(bmi) + ")")
-    bmi = round(bmi, 1)
     assert isinstance(name, int) or isinstance(bmi, int), \
-        "Height must be given in whole numbers of feet and inches. Received {type(Classification)}" 
+        "Height must be given in whole numbers to feet and inches. Received {type(Classification)}" 
     assert isinstance(weight_user= int) , \
-        "Weight must be given in pounds as height must be given in feet and inches. Received {type(height_user)}"
+        "Weight must be given in pounds as height must be given in inches. Received {type(height_user)}"
     print(f"{name}'s BMI is {bmi}.")
     
 def main():
     """Runs the main program logic.
     """
 try:
+
     name = get_user_name()
     height = convert_height_user(height_feet=any, height_inches=any)
-    weight_pounds = calculate_bmi(weight_pounds=any, height_user=any)
+    weight_pounds = calculate_weight(weight_pounds=any, height_user=any)
+    bmi = table_BMI(bmi=any)
     display_results(name=any,bmi=any, classification=any)
+    while True:
+        choice = input("Do you want to calculate another BMI? (Y/N) ")
+        if choice.upper() == "Y":
+            weight_pounds = float(input("Please enter your weight in lbs: "))
+            height_feet = int(input("Enter your height in feet: "))
+            height_inches = int(input("Enter any additional inches: "))
+            height_inches = convert_height_user(height_feet, height_inches)
+            bmi = calculate_weight(weight_pounds, height_inches)
+            display_results(name, bmi)
+        elif choice.upper() == "N":
+            break
+        else:
+            print("Invalid input. Please enter 'Y' or 'N'.")
 except:
-    
-    print("Unexpected error.")
-    print("Error:")
-    print("File: ") 
-    print("Line: ")
-
-
+    print(f"Error: {convert_height_user}")
+    print(f"An unknown error occurred: {calculate_weight}")
+     
+     
 main()
