@@ -55,7 +55,7 @@ def calculate_BMI(weigth):
     height_inches = (height_feet * 12) + height_inches 
     weight= (weight / (height_feet** 2)) * 703
     
-    if weight <= 0.45359237:
+    if weight <= 0:
         raise ValueError(f"Weight and height must be positive numbers. Received '{weigth}'")
     if bmi < 18.5:
         return "underweight"
@@ -71,7 +71,6 @@ def display_results(height, weight):
     Args:
         name (str): Name to person.
         bmi (float): BMI value.
-        c
     Returns:
         None
     Raises:
@@ -95,19 +94,7 @@ def main():
     weight_pounds = calculate_weight(weight_pounds=any, height_user=any)
     bmi = table_BMI(bmi=any)
     display_results(name=any,bmi=any, classification=any)
-    while True:
-        choice = input("Do you want to calculate another BMI? (Y/N) ")
-        if choice.upper() == "Y":
-            weight_pounds = float(input("Please enter your weight in lbs: "))
-            height_feet = int(input("Enter your height in feet: "))
-            height_inches = int(input("Enter any additional inches: "))
-            height_inches = convert_height_user(height_feet, height_inches)
-            bmi = calculate_weight(weight_pounds, height_inches)
-            display_results(name, bmi)
-        elif choice.upper() == "N":
-            break
-        else:
-            print("Invalid input. Please enter 'Y' or 'N'.")
+   
 except:
     print(f"Error: {convert_height_user}")
     print(f"An unknown error occurred: {calculate_weight}")
