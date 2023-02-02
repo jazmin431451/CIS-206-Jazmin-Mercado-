@@ -27,93 +27,84 @@ References:
 import os
 import sys
 
-height_feet = 1
-height_inches = 12
-weight = 0.45359237
+weight = 105
 def get_height():
     """convert height in feet and inches to total inches.
     Args:
-        height_feet (int): height in feet
-        height_inches (int): height in inches
-        height (float): user's height
+        none
     Returns:
-         int: Total height in inches.
+         int: height in feet and inches.
     exit:
         ValueError: "Height must be given in whole numbers of feet and inches."
         ValueError: "Height cannot be negative."
     """
     try:
-
-        height_feet = int(input("Please enter your height in feet: "))
-        height_inches = int(input("Please enter your height in inches: "))
-        height = float(height)
-        if height < height_feet or height < height_inches:
+        print("Please enter your height in feet: ")
+        height_feet = input()
+        height_feet = float()
+        print("Please enter your height in inches: ")
+        height_inches = input()
+        height_inches = float()
+        if (height_inches * 12) + height_inches:
             print("Height must be given in whole numbers of feet and inches.")
-            print(f"ValueError: {height}is invalid")
+            print(f"ValueError: {height_inches}is invalid")
             os._exit(1)
-        return height
+        return height_inches
     except ValueError:
         print("Height cannot be negative.")
-        print(f"ValueError: {height} is invalid")
+        print(f"ValueError: {height_inches} is invalid")
         os._exit(2)
 
-def calculate_BMI(weigth):
-    """Calculate BMI using weight in pounds and height in inches.
+def calculate_bmi(weight):
+    """Calculate BMI using weight in lbs and height in feet and inches.
     Args:
-        weight_pounds str(int): Weight in pounds.
-        height_user str(int): Height in inches.
+        bmi (float): Weight in lbs.
     Returns:
-        int: BMI rounded to one decimal place.
+        float: BMI rounded to one decimal place.
     Raises:
-        ValueError: If weight_pounds or height_inches are not positive numbers. 
-        ValueError: If bmi is not a positive number.
+        ValueError: If weight must be given in whole numbers of bmi. 
+        ValueError: If weight cannot be negative.
     """
     try:
-        weigth = float("please enter your weight in pounds:" )
-        bmi = float(weight)
-    except ValueError:
-        raise ValueError(f"If weight_pounds or height_inches are not positive numbers. Received '{weigth}'")
-    except:
-        raise 
-    if weight <= 0:
-        raise ValueError(f"Weight and height must be positive numbers. Received '{weigth}'")
-    elif bmi < 18:
-        raise ValueError(f"underweight. Recieved '{weight}'") 
-    elif bmi < 30:
-        raise ValueError(f"healthy, Recieved '{weight}'") 
-    else:
-        print(f"overweignt. Recieved '{weight}'") 
-    height_inches = (height_feet * 12) + height_inches 
-    weight = (weight / (height_feet** 2)) * 703 
-    return weight   
+        print("please enter your bmi in weight:" )
+        bmi= input()
+        bmi = float()
+    except:   
+        if bmi < 18.5:
+            raise ValueError (f" bmi must be 'underweight', 'healthy', or 'overweight. Received '{bmi}'") 
+    height_feet= 1.82
+    height_inches = 1.6616
+    height = (height_feet * 12) + height_inches
+    bmi = round(weight/(height**2),1)   
+    return bmi
 
 
-def display_results(height, weight):
+def display_results(bmi, height, weight):
     """Display BMI and Classification for a given name.
     Args:
-        name (str): Name to person.
+        height (float): Name to person.
         bmi (float): BMI value.
     Returns:
         None
     Raises:
-        AssertionError: Height must be given in whole numbers to feet and inches.
-        AssertionError: Weight must be given in pounds as height must be given in feet and inches.
-        AssertionError: Height must be given in whole numbers to feet and inches
-    """
-    
+         AssertionError: If height is not a valid float.
+         AssertionError: If weight is not a valid float.
+    """ 
     assert isinstance(height, float) or isinstance(height, int), \
-        "Height must be given in whole numbers to feet and inches. Received {type(height)}" 
+        "If height is not a valid float. Received {typr(height)}" 
     assert isinstance(weight, float) or isinstance(weight, int), \
-        "Weight must be given in pounds as height must be given in inches. Received {type(weight)}"
-    print(f"{height}'s BMI is {weight}.")
+        "If weight is not a valid float. Received {type(weight)}"
+    assert isinstance(bmi, float) or isinstance(bmi, int), \
+        "If bmi is not a valid float. Received {type(bmi)}"
+    print(f"{height} bmi is {weight} weight is {bmi}")
     
 
 def main():
     """Runs the main program logic."""
     try:
         height = get_height()
-        weight = calculate_BMI(weight)
-        display_results(height, weight)
+        bmi = calculate_bmi(weight)
+        display_results(bmi ,height, weight)
     except:
         print("Unexpected error.")
         print("Error:", sys.exc_info()[1])
