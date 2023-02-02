@@ -12,7 +12,6 @@ example:
     130 and 5'3 ft
     resulting from mass in kilograms and 
 height in meters is healthy (bmi= 23.025951121189216)
-
 Todo:
     * ask there weight in lbs and their height in feet and inches 
     * calculate and display their BMI and also include the display of the value
@@ -23,20 +22,21 @@ References:
     * https://en.wikipedia.org/wiki/Body_mass_index
     * https://www.mathsisfun.com/metric-imperial-conversion-charts.html
 """
+import sys 
 
-import os
-import sys
-
+UNDERWEIGHT_BMI = 18.5
+NORMAL_BMI = 24.9
+OVERWEIGHT_BMI = 29.9
 weight = 105
 def get_height():
     """convert height in feet and inches to total inches.
     Args:
-        none
+        height_feet (int): height in feet
+        height_inches (int): height i inches
     Returns:
-         int: height in feet and inches.
+         int: total height in inches.
     exit:
-        ValueError: "Height must be given in whole numbers of feet and inches."
-        ValueError: "Height cannot be negative."
+        ValueError: If height_feet or height_inches is not positive integer.          
     """
     try:
         print("Please enter your height in feet: ")
@@ -45,15 +45,15 @@ def get_height():
         print("Please enter your height in inches: ")
         height_inches = input()
         height_inches = float()
-        if (height_inches * 12) + height_inches:
+        if (height_feet * 12) + height_inches:
             print("Height must be given in whole numbers of feet and inches.")
             print(f"ValueError: {height_inches}is invalid")
-            os._exit(1)
+            sys._exit(1)
         return height_inches
     except ValueError:
         print("Height cannot be negative.")
         print(f"ValueError: {height_inches} is invalid")
-        os._exit(2)
+        sys._exit(2)
 
 def calculate_bmi(weight):
     """Calculate BMI using weight in lbs and height in feet and inches.
@@ -70,14 +70,19 @@ def calculate_bmi(weight):
         bmi= input()
         bmi = float()
     except:   
-        if bmi < 18.5:
-            raise ValueError (f" bmi must be 'underweight', 'healthy', or 'overweight. Received '{bmi}'") 
-    height_feet= 1.82
-    height_inches = 1.6616
-    height = (height_feet * 12) + height_inches
-    bmi = round(weight/(height**2),1)   
-    return bmi
+        if bmi < UNDERWEIGHT_BMI:
+            raise ValueError("Underweight: less than", UNDERWEIGHT_BMI)
+        elif bmi < NORMAL_BMI:
+            raise ValueError("Normal:", UNDERWEIGHT_BMI, "to", NORMAL_BMI)
+        else:
+            raise ValueError("Overweight:", OVERWEIGHT_BMI, "or greater" )
 
+    height_feet= 10
+    height_inches = 125
+    height = (height_feet * 12) + height_inches
+    bmi = (weight / (height_inches * height_inches)) * 703
+    bmi = round(weight/height)   
+    return weight
 
 def display_results(bmi, height, weight):
     """Display BMI and Classification for a given name.
@@ -98,7 +103,6 @@ def display_results(bmi, height, weight):
         "If bmi is not a valid float. Received {type(bmi)}"
     print(f"{height} bmi is {weight} weight is {bmi}")
     
-
 def main():
     """Runs the main program logic."""
     try:
