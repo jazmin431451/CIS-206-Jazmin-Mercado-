@@ -45,7 +45,7 @@ def get_height():
         print("Please enter your height in inches: ")
         height_inches = input()
         height_inches = float()
-        if (height_feet * 12) + height_inches:
+        if height_feet * 12 + height_inches:
             print("Height must be given in whole numbers of feet and inches.")
             print(f"ValueError: {height_inches}is invalid")
             sys._exit(1)
@@ -80,7 +80,7 @@ def calculate_bmi(weight):
     height_feet= 10
     height_inches = 125
     height = (height_feet * 12) + height_inches
-    bmi = (weight / (height_inches * height_inches)) * 703
+    bmi = (weight / height) * 703
     bmi = round(weight/height)   
     return weight
 
