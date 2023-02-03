@@ -24,10 +24,9 @@ References:
 """
 import sys 
 
-UNDERWEIGHT_BMI = 18.5
-NORMAL_BMI = 24.9
-OVERWEIGHT_BMI = 29.9
-weight = 105
+UNDERWEIGHT_BMI = 18
+NORMAL_BMI = 24
+OVERWEIGHT_BMI = 29
 def get_height():
     """convert height in feet and inches to total inches.
     Args:
@@ -45,7 +44,7 @@ def get_height():
         print("Please enter your height in inches: ")
         height_inches = input()
         height_inches = float()
-        if height_feet * 12 + height_inches:
+        if height_feet < height_inches:
             print("Height must be given in whole numbers of feet and inches.")
             print(f"ValueError: {height_inches}is invalid")
             sys._exit(1)
@@ -55,7 +54,7 @@ def get_height():
         print(f"ValueError: {height_inches} is invalid")
         sys._exit(2)
 
-def calculate_bmi(weight):
+def calculate_bmi():
     """Calculate BMI using weight in lbs and height in feet and inches.
     Args:
         bmi (float): Weight in lbs.
@@ -72,20 +71,20 @@ def calculate_bmi(weight):
     except:   
         if bmi < UNDERWEIGHT_BMI:
             raise ValueError("Underweight: less than", UNDERWEIGHT_BMI)
-        elif bmi < NORMAL_BMI:
+        elif bmi <= NORMAL_BMI:
             raise ValueError("Normal:", UNDERWEIGHT_BMI, "to", NORMAL_BMI)
         else:
             raise ValueError("Overweight:", OVERWEIGHT_BMI, "or greater" )
 
     height_feet= 10
-    height_inches = 125
-    height = (height_feet * 12) + height_inches
-    bmi = (weight / height) * 703
-    bmi = round(weight/height)   
-    return weight
+    height_inches = 12
+    weight = (height_feet * 12) + height_inches
+    bmi = (weight / (height_feet * height_inches)) * 703
+    bmi = round(bmi, 1)   
+    return bmi
 
-def display_results(bmi, height, weight):
-    """Display BMI and Classification for a given name.
+def display_results(bmi, height):
+    """Display BMI and weight for a given name.
     Args:
         height (float): Name to person.
         bmi (float): BMI value.
@@ -96,19 +95,17 @@ def display_results(bmi, height, weight):
          AssertionError: If weight is not a valid float.
     """ 
     assert isinstance(height, float) or isinstance(height, int), \
-        "If height is not a valid float. Received {typr(height)}" 
-    assert isinstance(weight, float) or isinstance(weight, int), \
-        "If weight is not a valid float. Received {type(weight)}"
+        "If height is not a valid float. Received {type(height)}" 
     assert isinstance(bmi, float) or isinstance(bmi, int), \
         "If bmi is not a valid float. Received {type(bmi)}"
-    print(f"{height} bmi is {weight} weight is {bmi}")
+    print(f"{height} weight is {bmi}")
     
 def main():
     """Runs the main program logic."""
     try:
         height = get_height()
-        bmi = calculate_bmi(weight)
-        display_results(bmi ,height, weight)
+        bmi = calculate_bmi()
+        display_results(bmi ,height)
     except:
         print("Unexpected error.")
         print("Error:", sys.exc_info()[1])
