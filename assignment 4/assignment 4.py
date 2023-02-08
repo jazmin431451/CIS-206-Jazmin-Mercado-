@@ -1,3 +1,26 @@
+""" This program converts this program and determines your body mass index.
+input:
+    your name, weight, and height
+output:
+    your weight in lbs
+    your height in feet
+    additional inches
+    one decimal place
+example:
+    enter your weight and height:
+    130 and 5'3 ft
+    resulting from mass in kilograms and
+height in meters is healthy (bmi= 23.025951121189216)
+Todo:
+    * ask there weight in lbs and their height in feet and inches
+    * calculate and display their BMI and also include the display of the value
+range for underweight,normal and overweight.
+    * also make sure the source in BMI is in range recommendations.
+References:
+    * https://www.w3schools.com/python/default.asp
+    * https://en.wikipedia.org/wiki/Body_mass_index
+    * https://www.mathsisfun.com/metric-imperial-conversion-charts.html
+"""
 import os
 import sys
 
@@ -189,7 +212,7 @@ def display_bmi_table(weight_pounds, height_inches):
 print("                                     BMI      ")     
 for weight_pounds in range(100, 250, 10):
     for height_inches in range(58, 77, 2):
-        bmi=weight_pounds / height_inches * 703
+        bmi=(weight_pounds / (height_inches ** 2)) * 703
         print("%.1f" % bmi, end="\t")
     print()
 
