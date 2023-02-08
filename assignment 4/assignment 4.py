@@ -185,14 +185,12 @@ def display_bmi_table(weight_pounds, height_inches):
         "weight in pounds must be a float. Received %s" % type(weight_pounds)
     assert isinstance(height_inches, float) or isinstance(height_inches, int), \
         "height in inches and feet must be a float. Received %s" % type(height_inches)
-    
-    print("W\tH")
-    weight_pounds = (100, 251, 10)
-    height_inches = (58, 77, 2) 
-    for weight_pounds in range(100, 251, 10):
-        for height_inches in range (58, 77, 2):
-            print("%.1f" % weight_pounds, height_inches, end="\t")
-            print("%.1f" % calculate_bmi(weight_pounds, height_inches))
+   
+print("                                     BMI      ")     
+for weight_pounds in range(100, 250, 10):
+    for height_inches in range(58, 77, 2):
+        bmi=weight_pounds / height_inches * 703
+        print("%.1f" % bmi, end="\t")
     print()
 
 def main():
