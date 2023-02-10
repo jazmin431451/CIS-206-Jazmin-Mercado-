@@ -1,26 +1,3 @@
-""" This program converts this program and determines your body mass index.
-input:
-    your name, weight, and height
-output:
-    your weight in lbs
-    your height in feet
-    additional inches
-    one decimal place
-example:
-    enter your weight and height:
-    130 and 5'3 ft
-    resulting from mass in kilograms and
-height in meters is healthy (bmi= 23.025951121189216)
-Todo:
-    * ask there weight in lbs and their height in feet and inches
-    * calculate and display their BMI and also include the display of the value
-range for underweight,normal and overweight.
-    * also make sure the source in BMI is in range recommendations.
-References:
-    * https://www.w3schools.com/python/default.asp
-    * https://en.wikipedia.org/wiki/Body_mass_index
-    * https://www.mathsisfun.com/metric-imperial-conversion-charts.html
-"""
 import os
 import sys
 
@@ -35,7 +12,7 @@ def get_pounds():
         ValueError: If weight is not in range > 0 and < 1000.
     """
     while True:
-        print("Enter weight in pounds:")
+        print("Enter weight in pounds or press <enter> to quit:")
         pounds = input()
         try:
             pounds = float(pounds)
@@ -65,7 +42,7 @@ def get_feet():
         ValueError: If feet is not in range > 0 and < 10.
     """
     while True:
-        print("Enter height in feet:")
+        print("Enter height in feet press <enter> to quit::")
         feet = input()
         try:
             feet = int(feet)
@@ -95,7 +72,7 @@ def get_inches():
         ValueError: If inches is not in range >= 0 and < 12.
     """
     while True:
-        print("Enter height in inches:")
+        print("Enter height in inches press <enter> to quit::")
         inches = input()
         try:
             inches = int(inches)
@@ -189,37 +166,39 @@ def display_bmi(bmi, classification):
     assert bmi > 0, "BMI must be a positive number."
     assert classification in ["underweight", "healthy", "overweight"], \
         "Classification must be 'underweight', 'healthy', or 'overweight'."
+
     print(f"BMI is {bmi} and they are classified as {classification}.")
 
 def display_bmi_table(weight_pounds, height_inches):
     """Display a table of BMI values for various weight and height combinations.
 
     Args:
-        bmi (float): calculate the weight and the height
+        weigth_pounds (float): bmi calculate the weight 
+        height_inches (float): bmi calculate the height
 
     Returns:
         None
 
     Raises:
-        AssertionError: If Classification must be 'underweight', 'healthy', or 'overweight'.
+        AssertionError: If weight in pounds must be a float.
+        AssertionError: If height in inches must be a float.
     """
     assert isinstance(weight_pounds, float) or isinstance(weight_pounds, int), \
         "weight in pounds must be a float. Received %s" % type(weight_pounds)
     assert isinstance(height_inches, float) or isinstance(height_inches, int), \
         "height in inches and feet must be a float. Received %s" % type(height_inches)
-    print("BMI")
-    weight_pounds = range(100, 250, 10)
-    header = '\t' + '\t'.join(map(str, weight_pounds))
-    rows = [header]
-    for height_inches in range(58, 76, 2):
-        row = '\t'.join(f'{weight_pounds/height_inches**2*703:.1f}' for weight_pounds in weight_pounds)
-        rows.append(f'{height_inches}\t{row}')
-    print('\n'.join(rows))
-    
+    print("BMI ")     
+    for weight_pounds in range(100, 250, 10):
+        for height_inches in range(58, 77, 2):
+            bmi=(weight_pounds / (height_inches ** 2)) * 703
+        print("%.1f" % bmi, end="\t")
+    print()
+
 def main():
- 
+   
    while True:
         try:
+
             weight_pounds = get_pounds()
             height_feet = get_feet()
             height_inches = get_inches()
@@ -230,11 +209,11 @@ def main():
             classification = classify_bmi(bmi)
             display_bmi(bmi, classification)
             display_bmi_table(weight_pounds, height_inches)
+            
         except:
             print("Unexpected error.")
             print("Error:", sys.exc_info()[1])
             print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename)
             print("Line: ", sys.exc_info()[2].tb_lineno)
-
 
 main()
