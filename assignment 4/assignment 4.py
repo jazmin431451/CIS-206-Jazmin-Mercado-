@@ -21,8 +21,9 @@ References:
     * https://en.wikipedia.org/wiki/Body_mass_index
     * https://www.mathsisfun.com/metric-imperial-conversion-charts.html
 """
-import os
+
 import sys
+
 
 def get_pounds():
     """Gets weight in pounds.
@@ -37,21 +38,21 @@ def get_pounds():
     while True:
         print("Enter weight in pounds or press <enter> to quit:")
         pounds = input()
+        if pounds.strip() == "":
+            return None
+
         try:
             pounds = float(pounds)
             if pounds <= 0:
                 print("pounds must be a positive value.")
                 print(f"ValueError: {pounds} is invalid.")
-                os._exit(1)
             elif pounds >= 1000:
                 print("pounds must be less than 1000.")
                 print(f"ValueError: {pounds} is invalid.")
-                os._exit(2)
             return pounds
         except ValueError:
             print("pounds must be a floating point value.")
             print(f"ValueError: {pounds} is invalid.")
-            os._exit(3)
 
 
 def get_feet():
@@ -67,21 +68,21 @@ def get_feet():
     while True:
         print("Enter height in feet press <enter> to quit:")
         feet = input()
+        if feet.strip() == "":
+            return None
+
         try:
             feet = int(feet)
             if feet <= 0:
                 print("feet must be a positive value.")
                 print(f"ValueError: {feet} is invalid.")
-                os._exit(4)
             elif feet >= 10:
                 print("feet must be less than 10.")
                 print(f"ValueError: {feet} is invalid.")
-                os._exit(5)
             return feet
         except ValueError:
             print("feet must be an integer value.")
             print(f"ValueError: {feet} is invalid.")
-            os._exit(6)
 
 
 def get_inches():
@@ -97,21 +98,21 @@ def get_inches():
     while True:
         print("Enter height in inches press <enter> to quit:")
         inches = input()
+        if inches.strip() == "":
+            return None
+
         try:
             inches = int(inches)
             if inches < 0:
                 print("inches must be a positive value.")
                 print(f"ValueError: {inches} is invalid.")
-                os._exit(7)
             elif inches >= 12:
                 print("inches must be less than 12.")
                 print(f"ValueError: {inches} is invalid.")
-                os._exit(8)
             return inches
         except ValueError:
             print("inches must be an integer value.")
             print(f"ValueError: {inches} is invalid.")
-            os._exit(9)
 
 
 def convert_height_inches(height_feet, height_inches):
@@ -192,51 +193,62 @@ def display_bmi(bmi, classification):
 
     print(f"BMI is {bmi} and they are classified as {classification}.")
 
-def display_bmi_table(weight_pounds, height_inches):
-    """Display a table of BMI values for various weight and height combinations.
+
+def display_bmi_table():
+    """Display a table of BMI values for various weights and heights.
 
     Args:
-        weigth_pounds (float): bmi calculate the weight 
-        height_inches (float): bmi calculate the height
+        None
 
     Returns:
         None
 
     Raises:
-        AssertionError: If weight in pounds must be a float.
-        AssertionError: If height in inches must be a float.
+        None
     """
-    assert isinstance(weight_pounds, float) or isinstance(weight_pounds, int), \
-        "weight in pounds must be a float. Received %s" % type(weight_pounds)
-    assert isinstance(height_inches, float) or isinstance(height_inches, int), \
-        "height in inches and feet must be a float. Received %s" % type(height_inches)
-    print("BMI chart")     
-    for weight_pounds in range(100, 250, 10):
-        for height_inches in range(58, 77, 2):
-            bmi=(weight_pounds / (height_inches ** 2)) * 703
-            print("%.1f" % bmi, end="\t")
+    print("\t\t\t\tBMI chart\n")
+
+    print("", end="\t")
+    for height_inches in range(58, 77, 2):
+        print(f"{height_inches:.1f}", end="\t")
     print()
 
-def main():
-   
-   while True:
-        try:
+    for weight_pounds in range(100, 250, 10):
+        print(weight_pounds, end="\t")
+        for height_inches in range(58, 77, 2):
+            bmi = (weight_pounds / (height_inches ** 2)) * 703
+            print(f"{bmi:.1f}", end="\t")
+        print()
 
+
+def main():
+    while True:
+        try:
             weight_pounds = get_pounds()
-            height_feet = get_feet()
-            height_inches = get_inches()
-            if weight_pounds == None:
+            if weight_pounds is None:
                 break
+
+            height_feet = get_feet()
+            if height_feet is None:
+                break
+
+            height_inches = get_inches()
+            if height_inches is None:
+                break
+
             height_inches = convert_height_inches(height_feet, height_inches)
             bmi = calculate_bmi(weight_pounds, height_inches)
             classification = classify_bmi(bmi)
+
             display_bmi(bmi, classification)
             display_bmi_table(weight_pounds, height_inches)
-            
-        except:
+
+        except Exception as exception:
             print("Unexpected error.")
+            print(exception)
             print("Error:", sys.exc_info()[1])
             print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename)
             print("Line: ", sys.exc_info()[2].tb_lineno)
+
 
 main()
