@@ -246,4 +246,6 @@ def main():
             print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename)
             print("Line: ", sys.exc_info()[2].tb_lineno)
 
+
+if __name__ == "__main__":
     main()
