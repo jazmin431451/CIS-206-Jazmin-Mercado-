@@ -173,10 +173,9 @@ def classify_bmi(bmi):
         return "overweight"
 
 
-def display_bmi(bmi, classification):
+def display_results(bmi, classification):
     """Display BMI and classification for a given name.
     Parameters:
-        name (str): Name of person.
         bmi (float): BMI value.
         classification (str): Classification of BMI.
     Raises:
@@ -217,7 +216,7 @@ def display_bmi_table():
         print()
 
 
-def main():  # pragma: no cover
+def main():
     while True:
         try:
             weight_pounds = get_pounds()
@@ -235,8 +234,7 @@ def main():  # pragma: no cover
             height_inches = convert_height_inches(height_feet, height_inches)
             bmi = calculate_bmi(weight_pounds, height_inches)
             classification = classify_bmi(bmi)
-
-            display_bmi(bmi, classification)
+            display_results(bmi, classification)
             display_bmi_table(weight_pounds, height_inches)
 
         except Exception as exception:
@@ -247,5 +245,5 @@ def main():  # pragma: no cover
             print("Line: ", sys.exc_info()[2].tb_lineno)
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     main()
