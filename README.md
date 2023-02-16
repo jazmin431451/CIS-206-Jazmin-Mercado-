@@ -11,3 +11,6 @@ I found it difficult to calculate the assignment 3 approach. I simply filled out
 
 ## Assignment 4
 This assignment taught me more about the for and while loops. For loops are extremely useful programming tools. However, when you're just getting started, they can be a little perplexing. How To iterate through each number in a specified range, for loops can be used in conjunction with Python's range() function. The while loop, like in Python, is used to execute a block of statements repeatedly until a given condition is met. When the condition is met, the line immediately following the loop in the program is executed. The while loop runs the block until a condition is met. When the condition is met, the statement is executed immediately following the loop. The else clause is only used when your while clause fails.
+
+## Assignment 5
+Assignment 5 is about testing the programming, and processing the BMI was challenging. So I should use every tool at my disposal to make it as simple as possible. Pytest is a fantastic tool for increasing testing productivity. However, I was having difficulty processing the four errors. I used some of the Wikiversity instructors' examples as well as other materials describing how to use pytest. So, while this Python test is still in its early stages, practicing will help me understand some of what I'm doing.
