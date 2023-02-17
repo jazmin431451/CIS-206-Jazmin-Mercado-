@@ -216,7 +216,7 @@ def display_bmi_table():
         print()
 
 
-def main():
+def main():  # pragma: no cover
     while True:
         try:
             weight_pounds = get_pounds()
@@ -245,5 +245,5 @@ def main():
             print("Line: ", sys.exc_info()[2].tb_lineno)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

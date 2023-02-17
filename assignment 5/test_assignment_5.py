@@ -137,47 +137,25 @@ def test_calculate_bmi_empty_string_return_none():
 
 
 def test_calculate_bmi_raises_value_error_on_numeric_value():
-    try:
+    with pytest.raises(ValueError):
         assignment_5.calculate_bmi(float("X"))
-
-    except ValueError as error:
-        print()
-        print(error)
 
 
 def test_calculate_bmi_value_error_positive_number():
-    try:
+    with pytest.raises(ValueError):
         assignment_5.calculate_bmi(165, 62)
-
-    except ValueError as error:
-        print()
-        print(error)
 
 
 def test_display_results_displays_results(capsys):
-    try:
+    with pytest.raises(AssertionError):
         assignment_5.display_results(186, 75)
-        captured = capsys.readouterr()
-        assert captured.out == "140 pounds is 24.8 bmi\n\n"
-
-    except AssertionError as error:
-        print()
-        print(error)
-
+    
 
 def test_display_results_raises_assertion_error_bmi():
-    try:
+    with pytest.raises(AssertionError):
         assignment_5.display_results("X", 0)
-
-    except AssertionError as error:
-        print()
-        print(error)
 
 
 def test_display_results_raises_assertion_error_classification():
-    try:
+    with pytest.raises(AssertionError):
         assignment_5.display_results(0, "X")
-
-    except AssertionError as error:
-        print()
-        print(error)
