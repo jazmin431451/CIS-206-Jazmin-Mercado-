@@ -1,22 +1,23 @@
-"""This program counts thewoed in entered the stings.
+"""This program encodes and decodes strings using run-length encoding (RLE).
 
-Input: 
-    text string
+Input:
+    Text string
 
-output:
-    RLE encoded string 
+Output:
+    Encoded or decoded string
 
 Example:
     Enter a string or press <Enter> to quit:
-    AAABC
-    the user's enter A3BC2.
-    enter a string or press <Enter> to quit:
+     AAABCC
+    The encoded string is A3BC2.
+
+    Enter a string or press <Enter> to quit:
     ...
 
 References:
-    https://https://en.wikiversity.org/wiki/Applied_Programming/Strings
-"""
+    https://en.wikipedia.org/wiki/Run-length_encoding
 
+"""
 import sys
 
 def get_text():
@@ -37,44 +38,46 @@ def get_text():
         return text
 
 
-def encode(text):
-    """Encode a string using RLE.
+def encode_rle(text):
+    """Run-length encodes text.
 
     Args:
-        text (string): Text string to be encoded.
+        text (string): text to be encoded.
 
     Returns:
-        string: RLE encoded string.
+        encoded_text (string): RLE encoded text.
 
     """
-    encoded_string = ""
-    current_char = text[0]
-    count = 1
+    encoded_text = ""
+    count = 0
     for i in range(0, len(text)):
-        if not current_char and text[i] not in encoded_string:
-            count += 1  
-        elif current_char and text[i] in encoded_string:
-            count = 1
-    return current_char
+        count += 1
+        if i + 1 == len(text) or text[i] != text[i + 1]:
+            encoded_text += text[i]
+            if count != 1:
+                encoded_text += str(count)
+            count = 0
+    return encoded_text
 
-def decode(text):
-    """Decodes a RLE encoded string.
+
+def decode_rle(text):
+    """Run-length decodes text.
 
     Args:
-        text (string): RLE encoded string.
+        text (string): text to be decoded.
 
     Returns:
-        string: Decoded string.
+        decoded_text (string): RLE decoded text.
 
     """
-    decoded_string = ""
-    count = ""
+    decoded_text = ""
     for i in range(len(text)):
         if text[i].isdigit():
-            break    
-        else: count += text[i]
-    decoded_string = text[(count * 1): (len(text))]      
-    return decoded_string
+            decoded_text += text[i - 1] * int(text[i])
+        elif not text[i].isdigit():
+            decoded_text += text[i]
+    return decoded_text
+
 
 def main():
     """Runs the main program logic."""
@@ -84,9 +87,9 @@ def main():
             text = get_text()
             if text == None:
                 break
-            print(f"You entered {decode(text)} decode.\n")
-            print("Here is your string with the encode:\n")
-            print(encode(text))
+            print(f"You entered {encode_rle(text)}.")
+            print("Here is your decoded string:\n")
+            print(decode_rle(text))
     except:
         print("Unexpected error.")
         print("Error:", sys.exc_info()[1])
