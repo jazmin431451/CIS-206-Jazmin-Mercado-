@@ -79,7 +79,7 @@ def decode_rle(text):
     return decoded_text
 
 
-def main():
+def main():  # pragma: no cover
     """Runs the main program logic."""
 
     try:
@@ -97,4 +97,5 @@ def main():
         print("Line: ", sys.exc_info()[2].tb_lineno)
 
 
-main()
+if __name__ == "__main__":  # pragma: no cover
+    main()

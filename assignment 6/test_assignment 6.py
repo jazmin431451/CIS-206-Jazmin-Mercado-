@@ -21,27 +21,27 @@ def test_get_text_empty_string_returns_none():
     assignment_6.input = input
     assert assignment_6.get_text() == None
 
-def test_raises_encoded_rle_value_error_numeric_value():
+def test_raises_encode_rle_value_error_numeric_value():
     with pytest.raises(ValueError):
-        assignment_6.encoded_rle(float("X"))
+        assignment_6.encode_rle(float("X"))
 
 
-def test_encoded_rle_raises_value_error_zero():
+def test_encode_rle_raises_value_error_zero():
     with pytest.raises(ValueError):
-        assignment_6.encoded_rle('a5b3c4')
+        assignment_6.encode_rle('a5b3c4')
 
 
-def test_decoded_rle(capsys):
-    assignment_6.decoded_rle('a3b4c2', 'aaabbbbcc')
+def test_decode_rle(capsys):
+    assignment_6.decode_rle('a3b4c2', 'aaabbbbcc')
     captured = capsys.readouterr()
     assert captured.out == "a3b4c2 encoded is aaabbbbcc decoded\n\n"
 
 
-def test_decoded_rle_raises_assertion_error_text():
+def test_decode_rle_raises_assertion_error_text():
     with pytest.raises(AssertionError):
         assignment_6.display_results("X", 0)
 
 
-def test_decoded_rle_raises_assertion_error_string():
+def test_decode_rle_raises_assertion_error_string():
     with pytest.raises(AssertionError):
         assignment_6.decode_rle(0, "X")
