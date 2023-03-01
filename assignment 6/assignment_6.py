@@ -8,75 +8,63 @@ Example:
      AAABCC
     The encoded string is A3BC2.
     Enter a string or press <Enter> to quit:
-    ...
-References:
-    https://en.wikipedia.org/wiki/Run-length_encoding
 """
 import sys
 
 def get_text():
+    """Gets text string.
+    Args:
+        None
+    Returns:
+        string: Text string entered or None if no string entered.
     """
-    Prompt the user to enter some text and return it.
-    If the user enters an empty string, return None.
-    """
-    text = input("Enter some text: ")
-    return text if text != '' else None
+    print("Enter a string or press <Enter> to quit:")
+    text = input()
+    if text == "":
+        return None
+    else:
+        return text
 
 
 def encode_rle(text):
     """Run-length encodes text.
-
     Args:
         text (string): text to be encoded.
-
     Returns:
         encoded_text (string): RLE encoded text.
-
     """
-    if not text:
-        return ''
-
-    encoded_text = ''
-    current_char = text[0]
-    count = 1
-
-    for i in range(1, len(text)):
-        if text[i] == current_char:
-            count += 1
-        else:
-            encoded_text += current_char + (str(count) if count > 1 else '')
-            current_char = text[i]
-            count = 1
-
-    encoded_text += current_char + (str(count) if count > 1 else '')
-
+    encoded_text = ""
+    count = 0
+    for i in range(0, len(text)):
+        count += 1
+        if i + 1 == len(text) or text[i] != text[i + 1]:
+            encoded_text += text[i]
+            if count != 1:
+                encoded_text += str(count)
+            count = 0
     return encoded_text
 
+
 def decode_rle(text):
-    """Run-length decodes text.
-
-    Args:
-        text (string): text to be decoded.
-
-    Returns:
-        decoded_text (string): RLE decoded text.
-
+    """
+    Decode the given text that has been encoded using run-length encoding and return the result.
     """
     if not text:
         return ''
+
     decoded_text = ''
     current_char = ''
     count_str = ''
+
     for char in text:
         if char.isalpha():
-            decoded_text += current_char * (int(count_str) if count_str else 1)
+            decoded_text += current_char * int(count_str)
+        if count_str >= 1:
             current_char = char
             count_str = ''
-        else:
+        elif count_str >= 1:
             count_str += char
-
-    decoded_text += current_char * (int(count_str) if count_str else 1)
-
+    decoded_text += current_char * int(count_str)
     return decoded_text
 
 
