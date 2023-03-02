@@ -8,6 +8,22 @@ Example:
      AAABCC
     The encoded string is A3BC2.
     Enter a string or press <Enter> to quit:
+    ...
+References:
+    https://en.wikipedia.org/wiki/Run-length_encoding
+    stratford career institue your reading material - 2013
+"""
+
+"""This program encodes and decodes strings using run-length encoding (RLE).
+Input:
+    Text string
+Output:
+    Encoded or decoded string
+Example:
+    Enter a string or press <Enter> to quit:
+     AAABCC
+    The encoded string is A3BC2.
+    Enter a string or press <Enter> to quit:
 """
 import sys
 
