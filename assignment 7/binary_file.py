@@ -17,43 +17,43 @@ References:
 import sys
 import struct
 
-
-def get_file():
+def get_file_name():
 	"""Obtains user input for file name
 
 	Input: None
 
 	Returns:
-		file: string
+		password: string
 
 	Except:
-		ValueError: If file is not a valid string
+		ValueError: If password is not a valid string
 
 	Exit:
-		file is empty
+		password is empty
 
 	"""
 	try:
-		print('Please input the password you would like to use. To exit, press Enter')
-		file = input()
+		
+		print('Please input password you would like to use. To exit, press Enter')
+		filename = input()
 
-		if type(file) is not str:
+		if type(filename) is not str:
 			raise ValueError
 
-		if file == '':
+		if filename == '':
 			sys.exit(0)
 		else:
-			return file
+			return filename
 	except ValueError:
-		print("File name must be a string.")
-		print("ValueError: '%s' is invalid." % file)
+		print("filename must be a strong.")
+		print("ValueError: '%s' is invalid." % filename)
 
 
-def append_characters(file):
-	"""Fills file with the upper case english alphabet characters
+def append_characters(filename):
+	"""Fills filename with the upper case english alphabet characters
 
 	Input:
-		file: string
+		filename: string
 
 	Output: None
 
@@ -64,44 +64,47 @@ def append_characters(file):
 	"""
 
 	try:
-		fd_out = open(file, "wb+")
-
-		if type(file) is not str:
-			raise ValueError("File name must be a string.\nReceived %f" % file)
-		if file == '':
+		fd_out = open(filename, "wb+")
+		if type(filename) is not str:
+			raise ValueError("File name must be a string.\n Received %f" % filename)
+		if filename == '':
 			raise ValueError("File name cannot be empty.")
-
-		id = 65
-		val = id
-
-		for i in range(26):
-			entry = struct.pack('<HI', id, val)
-			id += 1
-			val = id
-
-			fd_out.write(entry)
-			fd_out.flush()
+		length = (filename)
+		character_sets += 26
+		
+		for i in range(60, 127):
+			entry = struct.pack('<HI',filename)
+			entry = length * (character_sets ** 2)
+		
+		fd_out.write(entry)
+		fd_out.flush()
 
 		fd_out.close()
 	except:
 		print("Unexpected error.")
 		print("Error:", sys.exc_info()[1])
-		print("File: ", sys.exc_info()[2].tb_frame.f_code.co_file)
+		print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename)
 		print("Line: ", sys.exc_info()[2].tb_lineno)
+		return entry
+	
+def load_words():
+    with open('10-million-password.text') as word_file:
+        valid_words = set(word_file.read().split())
 
+    return valid_words
 
 def main():
 	"""Runs the main program logic."""
 
 	try:
-		file = get_file()
-		append_characters(file)
+		get_file_name()
+		append_characters()
+		load_words()
 	except:
 		print("Unexpected error.")
 		print("Error:", sys.exc_info()[1])
-		print("File: ", sys.exc_info()[2].tb_frame.f_code.co_file)
+		print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename)
 		print("Line: ", sys.exc_info()[2].tb_lineno)
-
 
 if __name__ == "__main__":
 	main()
