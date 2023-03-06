@@ -11,7 +11,7 @@ Output:
 References:
 	https://www.geeksforgeeks.org/file-handling-python/
 	https://en.wikiversity.org/wiki/Applied_Programming/Files/Python3
-
+	https://en.wikipedia.org/wiki/Password_strength#Password_creation
 """
 
 import sys
