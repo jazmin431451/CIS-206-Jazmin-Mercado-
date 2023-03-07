@@ -42,10 +42,8 @@ def create_file(file):
     """
     with open(file, "w+") as password:
         password.write("the user passwor\n")
-        charcater = 26
-        for charcater in range(36, 56):
-            lenght = 1 + lenght 
-            lenght = 64/ charcater
+        for lenght in range(60, 127):
+            password = 1 + lenght 
             password.write("the password has to be stronge .")
             
 def read_file(file,):
@@ -78,12 +76,10 @@ def append_file(file):
 
     """
     with open(file, "a+") as password:
-        character = 26
-        for character in range(36, 56):
-            lenght = 1 + lenght 
-            lenght = 64/ character
+        for lenght in range(127, 128):
+            password = 1 + lenght 
             password.write("the password has to be stronge .")
-        
+            
 def delete_file(filename):
     """Deletes filename.
 
