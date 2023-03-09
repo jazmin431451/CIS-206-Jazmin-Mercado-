@@ -10,108 +10,60 @@ References:
 	https://en.wikipedia.org/wiki/Password_strength#Password_creation
 """
 import os
-import sys
-
 
 def get_password():
-    """Creates filename and adds temperature data to the file.
-
+    """get the user enter the password.
     Args:
-        filename (string): Filename to create.
-
+        password(str): The password input by the user, or True if the password is empty.
     Returns:
-        None
-
+       float: password is weak or none if no password entered it return password.
     """
-    password = input("enter the password. to exit, press enter")
+    print("Enter the password. To exit, press enter: ")
+    password = input()
+    
     if password == "":
         return True
     else:
-        return False
-        
+        return password
 
-def create_file(file):
-    """Reads filename and displays each line.
 
+def read_file():
+    """Reads filename and displays the file contents.
     Args:
         filename (string): Filename to open and read.
-
     Returns:
         None
-
     """
-    with open(file, "w+") as password:
-        password.write("the user passwor\n")
-        for lenght in range(60, 127):
-            password = 1 + lenght 
-            password.write("the password has to be stronge .")
-            
-def read_file(file,):
-    """Reads filename and displays each line.
+    with open("file.txt", "r") as f:
+        print(f.read())
+    if 40 > 50:
+        print("is reasonable password.")
+    else:
+        print("is strong passsword")
 
-    Args:
-        filename (string): Filename to open and read.
-
-    Returns:
-        None
-
-    """
-    with open(file, "r+") as password:
-        for line in password:
-            line = line.strip()
-            print(line)
-    print("")
-    with open("password-list-top.txt", "r+") as filename:
-        print(filename)
-    
-    
-def append_file(file):
-    """Appends temperature data to filename.
-
+def append_file(filename, password):
+    """Appends the password to the file.
     Args:
         filename (string): Filename to open and append.
-
+        password (string): Password to append to the file.
     Returns:
         None
-
     """
-    with open(file, "a+") as password:
-        for lenght in range(127, 128):
-            password = 1 + lenght 
-            password.write("the password has to be stronge .")
-            
-def delete_file(filename):
-    """Deletes filename.
+    with open(filename, "a+") as f:
+        f.write(password)
 
-    Args:
-        filename (string): Filename to delete.
-
-    Returns:
-        None
-
-    """
-    os.remove(filename)
 
 def main():
     """Runs the main program logic."""
+    password = get_password()
+    filename = "file.txt"
 
-    try:
-        password = "file.text"
-        filename = "password-list-top.text"
-
-        if os.path.isfile(password):
-            print("File '%s' already exists." % password)
-            exit(1)
-        get_password()
-        create_file(password)
-        read_file(password, filename)
-        append_file(password)
-        delete_file(password)
-    except:
-        print("Unexpected error.")
-        print("Error:", sys.exc_info()[1])
-        print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename) 
-        print("Line: ", sys.exc_info()[2].tb_lineno)
+    while password != True:
+        
+        read_file()
+        append_file(filename, password)
+        password = get_password()
 
 
-main()
+if __name__ == "__main__":
+    main()
