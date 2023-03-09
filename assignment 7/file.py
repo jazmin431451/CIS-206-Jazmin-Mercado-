@@ -1,13 +1,15 @@
-"""This program demonstrates binary file creation
-It creates a file and adds data to the file
-Input: None
+"""This program file creation
+It creates a file and adds password to the file
+Input: none
 Output:
-	upper_characters: file with the upper case english letters
-	lower_characters: file with the lower case english letters
+	password: ask the user's password
+	filename: writeing the password in text into the file
 References:
 	https://www.geeksforgeeks.org/file-handling-python/
 	https://en.wikiversity.org/wiki/Applied_Programming/Files/Python3
 	https://en.wikipedia.org/wiki/Password_strength#Password_creation
+	https://www.w3schools.com/python/python_file_handling.asp
+	https://www.py4e.com/lessons/files
 """
 import os
 
