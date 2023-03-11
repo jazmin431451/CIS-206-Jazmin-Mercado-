@@ -1,101 +1,106 @@
-"""This program file creation
-It creates a file and adds password to the file
-Input: none
+"""This program encodes and decodes strings using run-length encoding (RLE).
+Input:
+    Text string
 Output:
-	password: ask the user's password
-	filename: writeing the password in text into the file
+    Encoded or decoded string
+Example:
+    Enter a string or press <Enter> to quit:
+     AAABCC
+    The encoded string is A3BC2.
+    Enter a string or press <Enter> to quit:
+    ...
 References:
-	https://www.geeksforgeeks.org/file-handling-python/
-	https://en.wikiversity.org/wiki/Applied_Programming/Files/Python3
-	https://en.wikipedia.org/wiki/Password_strength#Password_creation
-	https://www.w3schools.com/python/python_file_handling.asp
-	https://www.py4e.com/lessons/files
-    https://pymotw.com/2/re/
+    https://en.wikipedia.org/wiki/Run-length_encoding
     stratford career institue your reading material - 2013
 """
 
-import re
-def get_password():
-    """get the user enter the password.
-    Args:
-        password(str): The password input by the user, or True if the password is empty.
-    Returns:
-       float: password is weak or none if no password entered it return password.
-    """
-    print("Enter the password. To exit, press enter: ")
-    password = input()
-    if not password:
-        return ''
-    
-def read_file(password):
-    """Reads filename and displays the file contents.
-    Args:
-        filename (string): Filename to open and read.
+"""This program encodes and decodes strings using run-length encoding (RLE).
+Input:
+    Text string
+Output:
+    Encoded or decoded string
+Example:
+    Enter a string or press <Enter> to quit:
+     AAABCC
+    The encoded string is A3BC2.
+    Enter a string or press <Enter> to quit:
+"""
+import sys
 
-    Returns:
+def get_text():
+    """Gets text string.
+    Args:
         None
+    Returns:
+        string: Text string entered or None if no string entered.
     """
-    with open("file.txt", "r") as file:
-        if re.search(password, file.read()):
-            print("Password was found in the text file. Entropy: 0 to 32 bits.")  
-            return 'weak'
-    entropy = 0
-    if any(character .islower() for character  in password):
-        entropy += 4
-    if any(character .isupper() for character  in password):
-        entropy += 4
-    if any(character .isdigit() for character  in password):
-        entropy += 4
-    if any(character  in "+,.:-_()*/;!?#" for character  in password):
-        entropy += 6
-    length = len(password)
-    if length > 8:
-        entropy += 12
-    if length > 13:
-        entropy += 20
-    if length > 15:
-        entropy += 24
-    if length >= 20:
-        entropy += 32
-
-    if length > 1:
-        entropy += (length - 1) * 2
-    if length > 2:
-        entropy += (length - 2) * 2
-    if length > 3:
-        entropy += (length - 3) * 2
-    if entropy <= 4:
-        return 'weak'
-    elif entropy <= 12:
-        return 'medium'
-    elif entropy <= 24:
-        return 'strong'
+    print("Enter a string or press <Enter> to quit:")
+    text = input()
+    if text == "":
+        return None
     else:
-        return 'very strong'       
-         
-def append_file(filename, password):
-    """Appends the password to the file.
+        return text
+
+
+def encode_rle(text):
+    """Run-length encodes text.
     Args:
-        filename (string): Filename to open and append.
-        password (string): Password to append to the file.
+        text (string): text to be encoded.
     Returns:
-        None
+        encoded_text (string): RLE encoded text.
     """
-    with open(filename, "a+") as file:
-        file.write(password + '\n')
+    encoded_text = ""
+    count = 0
+    for i in range(0, len(text)):
+        count += 1
+        if i + 1 == len(text) or text[i] != text[i + 1]:
+            encoded_text += text[i]
+            if count != 1:
+                encoded_text += str(count)
+            count = 0
+    return encoded_text
 
 
-def main():
+def decode_rle(text):
+    """
+    Decode the given text that has been encoded using run-length encoding and return the result.
+    """
+    if not text:
+        return ''
+
+    decoded_text = ''
+    current_char = ''
+    count_str = ''
+
+    for char in text:
+        if char.isalpha():
+            decoded_text += current_char * int(count_str)
+        if count_str >= 1:
+            current_char = char
+            count_str = ''
+        elif count_str >= 1:
+            count_str += char
+    decoded_text += current_char * int(count_str)
+    return decoded_text
+
+
+def main():  # pragma: no cover
     """Runs the main program logic."""
-    filename = "file.txt"
 
-    while True:
-        password = get_password()
-        if not password:
-            break
-        print(f"Password strength: {password}")
-        read_file()
-        append_file(filename, password)
+    try:
+        while True:
+            text = get_text()
+            if text == None:
+                break
+            print(f"You entered {encode_rle(text)}.")
+            print("Here is your decoded string:\n")
+            print(decode_rle(text))
+    except:
+        print("Unexpected error.")
+        print("Error:", sys.exc_info()[1])
+        print("File: ", sys.exc_info()[2].tb_frame.f_code.co_filename) 
+        print("Line: ", sys.exc_info()[2].tb_lineno)
 
-if __name__ == "__main__":
+
+if __name__ == "__main__":  # pragma: no cover
     main()
