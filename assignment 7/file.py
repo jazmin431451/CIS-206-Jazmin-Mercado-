@@ -12,7 +12,7 @@ References:
 	https://www.py4e.com/lessons/files
 """
 import os
-
+import string
 def get_password():
     """get the user enter the password.
     Args:
@@ -22,26 +22,63 @@ def get_password():
     """
     print("Enter the password. To exit, press enter: ")
     password = input()
-    
     if password == "":
         return True
     else:
         return password
+    
 
 
-def read_file():
+def read_file(filename, password ):
     """Reads filename and displays the file contents.
     Args:
         filename (string): Filename to open and read.
+        password (string): the password entered by the user or an empty string if none was entered.
     Returns:
         None
     """
-    with open("file.txt", "r") as f:
-        print(f.read())
-    if 40 > 50:
-        print("is reasonable password.")
-    else:
-        print("is strong passsword")
+    with open(filename, "r") as file:
+        print(file.read())
+    length =  len(password)
+    entropy = 0
+    
+    character = string.digits,string.ascii_uppercase, string.ascii_lowercase, string.punctuation
+
+    for password in character:
+
+        if password == character:
+            print("passowrd was found in the text file. entropy: 0 to 32 bytes")
+# Calculate entropy
+        elif length > 8:
+            entropy += 12
+            print("is ok password to process.")
+        elif length > 13:
+            entropy += 20
+            print("is good password to process.")
+        elif length > 15:
+            entropy += 24
+            print("is very good password to process.")
+        else:
+            length >= 20
+            entropy += 32
+            print("is strong password to process.")
+# Use this equation to generate longer passwords.
+        if length > 1:
+            entropy += (length - 1) * 2
+        if length > 2:
+            entropy += (length - 2) * 2
+        if length > 3:
+            entropy += (length - 3) * 2
+# Determine password strength based on entropy
+        if entropy <= 4:
+            return 'weak'
+        elif entropy <= 12:
+            return 'medium'
+        elif entropy <= 24:
+            return 'strong'
+        else:
+            return 'very strong'
+   
 
 def append_file(filename, password):
     """Appends the password to the file.
@@ -57,14 +94,15 @@ def append_file(filename, password):
 
 def main():
     """Runs the main program logic."""
-    password = get_password()
     filename = "file.txt"
 
-    while password != True:
-        
-        read_file()
-        append_file(filename, password)
+    while True:
         password = get_password()
+        if not password:
+            break
+        print(f"Password strength: {password}")
+        read_file(filename, password )
+        append_file(filename, password)
 
 
 if __name__ == "__main__":
