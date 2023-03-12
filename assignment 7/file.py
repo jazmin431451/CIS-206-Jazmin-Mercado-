@@ -27,18 +27,18 @@ def get_password():
     else:
         return password
     
-
-
-def read_file(filename, password ):
-    """Reads filename and displays the file contents.
+def calculate_entropy(password):
+    """Calculates the entropy of a password.
     Args:
-        filename (string): Filename to open and read.
-        password (string): the password entered by the user or an empty string if none was entered.
+        password (string): Password to calculate entropy for.
     Returns:
-        None
+        float: Entropy of the password strength.
     """
-    with open(filename, "r") as file:
-        print(file.read())
+    length = len(password)
+    entropy = 0
+    
+    character = string.digits + string.ascii_uppercase + string.ascii_lowercase + string.punctuation
+
     length =  len(password)
     entropy = 0
     
@@ -48,20 +48,7 @@ def read_file(filename, password ):
 
         if password == character:
             print("passowrd was found in the text file. entropy: 0 to 32 bytes")
-# Calculate entropy
-        elif length > 8:
-            entropy += 12
-            print("is ok password to process.")
-        elif length > 13:
-            entropy += 20
-            print("is good password to process.")
-        elif length > 15:
-            entropy += 24
-            print("is very good password to process.")
-        else:
-            length >= 20
-            entropy += 32
-            print("is strong password to process.")
+
 # Use this equation to generate longer passwords.
         if length > 1:
             entropy += (length - 1) * 2
@@ -78,8 +65,17 @@ def read_file(filename, password ):
             return 'strong'
         else:
             return 'very strong'
-   
-
+        
+def read_file(filename):
+    """Reads filename and displays the file contents.
+    Args:
+        filename (string): Filename to open and read.
+    Returns:
+        None
+    """
+    with open(filename, "r") as file:
+        print(file.read())
+    
 def append_file(filename, password):
     """Appends the password to the file.
     Args:
@@ -89,7 +85,7 @@ def append_file(filename, password):
         None
     """
     with open(filename, "a+") as f:
-        f.write(password)
+        f.write(password + "\n")
 
 
 def main():
@@ -100,8 +96,11 @@ def main():
         password = get_password()
         if not password:
             break
-        print(f"Password strength: {password}")
-        read_file(filename, password )
+
+        entropy = calculate_entropy(password)
+        print(f"{entropy}")
+
+        read_file(filename)
         append_file(filename, password)
 
 
