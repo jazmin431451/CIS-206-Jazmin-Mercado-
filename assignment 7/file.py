@@ -23,10 +23,11 @@ def get_password():
     print("Enter the password. To exit, press enter: ")
     password = input()
     if password == "":
-        return True
+        return None
     else:
         return password
-    
+
+
 def calculate_entropy(password):
     """Calculates the entropy of a password.
     Args:
@@ -42,21 +43,22 @@ def calculate_entropy(password):
     length =  len(password)
     entropy = 0
     
-    character = string.digits,string.ascii_uppercase, string.ascii_lowercase, string.punctuation
+    character = string.digits, string.ascii_uppercase, string.ascii_lowercase, string.punctuation
 
     for password in character:
 
         if password == character:
             print("passowrd was found in the text file. entropy: 0 to 32 bytes")
 
-# Use this equation to generate longer passwords.
+        # Use this equation to generate longer passwords.
         if length > 1:
             entropy += (length - 1) * 2
         if length > 2:
             entropy += (length - 2) * 2
         if length > 3:
             entropy += (length - 3) * 2
-# Determine password strength based on entropy
+
+        # Determine password strength based on entropy
         if entropy <= 4:
             return 'weak'
         elif entropy <= 12:
@@ -66,6 +68,7 @@ def calculate_entropy(password):
         else:
             return 'very strong'
         
+
 def read_file(filename):
     """Reads filename and displays the file contents.
     Args:
@@ -75,7 +78,8 @@ def read_file(filename):
     """
     with open(filename, "r") as file:
         print(file.read())
-    
+
+
 def append_file(filename, password):
     """Appends the password to the file.
     Args:
@@ -88,7 +92,7 @@ def append_file(filename, password):
         f.write(password + "\n")
 
 
-def main():
+def main():  # pragma: no cover
     """Runs the main program logic."""
     filename = "file.txt"
 
@@ -104,5 +108,5 @@ def main():
         append_file(filename, password)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()
