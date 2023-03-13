@@ -3,7 +3,7 @@ It creates a file and adds password to the file
 Input: none
 Output:
 	password: ask the user's password
-	filename: writeing the password in text into the file
+	filename: writing the password in text into the file
 References:
 	https://www.geeksforgeeks.org/file-handling-python/
 	https://en.wikiversity.org/wiki/Applied_Programming/Files/Python3
@@ -13,7 +13,7 @@ References:
     https://en.wikipedia.org/wiki/Password_strength
     stratford career institute-13
 """
-import os
+import math
 import string
 def get_password():
     """get the user enter the password.
@@ -38,32 +38,21 @@ def calculate_entropy(password):
         float: Entropy of the password strength.
     """
     length = len(password)
-    entropy =  8
-    
     character = string.digits + string.ascii_uppercase + string.ascii_lowercase + string.punctuation
-
-    for password in character:
-
-        if password == character:
-            print("passowrd was found in the text file. entropy: 1 to 5  bytes")
-
-        # Use this equation to generate longer passwords.
-        if length > 1:
-            entropy += length * 26
-        if length > 3:
-            entropy += length * 26 
-        if length > 4:
-            entropy += length * 26 
-
-        # Determine password strength based on entropy
-        if entropy <= 28 :
-            return 'weak'
-        elif entropy <= 35 :
-            return 'medium'
-        elif entropy <= 59:
-            return 'strong'
-        else:
-            return 'very strong'
+    number_possible_character = len(character)
+    
+    # Calculate the entropy using the formula E = log2(RL)
+    entropy = math.log2(number_possible_character ** length)
+    
+    # Determine password strength based on entropy
+    if entropy <= 28 :
+        return 'weak'
+    elif entropy <= 35 :
+        return 'medium'
+    elif entropy <= 59:
+        return 'strong'
+    else:
+        return 'very strong'
         
 
 def read_file(filename):
@@ -99,7 +88,7 @@ def main():  # pragma: no cover
             break
 
         entropy = calculate_entropy(password)
-        print(f"{entropy}")
+        print(f"Password strength: {entropy}")
 
         read_file(filename)
         append_file(filename, password)
