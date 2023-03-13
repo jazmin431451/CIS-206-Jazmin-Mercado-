@@ -41,6 +41,32 @@ def calculate_entropy(password):
     character = string.digits + string.ascii_uppercase + string.ascii_lowercase + string.punctuation
     number_possible_character = len(character)
     
+    # Check if password contains at least one uppercase, lowercase, punctuation, and digit character
+    uppercase = False
+    lowercase = False
+    punctuation = False
+    digit = False
+    for character in password:
+        if character in string.ascii_uppercase:
+            uppercase = True
+        elif character in string.ascii_lowercase:
+            lowercase = True
+        elif character in string.punctuation:
+            punctuation = True
+        elif character in string.digits:
+            digit = True
+    
+    # Determine the size of the character set to be used in entropy calculation
+    character_size = 0
+    if uppercase:
+        character_size += len(string.ascii_uppercase)
+    if lowercase:
+        character_size += len(string.ascii_lowercase)
+    if punctuation:
+        character_size += len(string.punctuation)
+    if digit:
+        character_size += len(string.digits)
+    
     # Calculate the entropy using the formula E = log2(RL)
     entropy = math.log2(number_possible_character ** length)
     
