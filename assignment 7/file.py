@@ -10,6 +10,8 @@ References:
 	https://en.wikipedia.org/wiki/Password_strength#Password_creation
 	https://www.w3schools.com/python/python_file_handling.asp
 	https://www.py4e.com/lessons/files
+    https://en.wikipedia.org/wiki/Password_strength
+    stratford career institute-13
 """
 import os
 import string
@@ -36,34 +38,29 @@ def calculate_entropy(password):
         float: Entropy of the password strength.
     """
     length = len(password)
-    entropy = 0
+    entropy =  8
     
     character = string.digits + string.ascii_uppercase + string.ascii_lowercase + string.punctuation
-
-    length =  len(password)
-    entropy = 0
-    
-    character = string.digits, string.ascii_uppercase, string.ascii_lowercase, string.punctuation
 
     for password in character:
 
         if password == character:
-            print("passowrd was found in the text file. entropy: 0 to 32 bytes")
+            print("passowrd was found in the text file. entropy: 1 to 5  bytes")
 
         # Use this equation to generate longer passwords.
         if length > 1:
-            entropy += (length - 1) * 2
-        if length > 2:
-            entropy += (length - 2) * 2
+            entropy += length * 26
         if length > 3:
-            entropy += (length - 3) * 2
+            entropy += length * 26 
+        if length > 4:
+            entropy += length * 26 
 
         # Determine password strength based on entropy
-        if entropy <= 4:
+        if entropy <= 28 :
             return 'weak'
-        elif entropy <= 12:
+        elif entropy <= 35 :
             return 'medium'
-        elif entropy <= 24:
+        elif entropy <= 59:
             return 'strong'
         else:
             return 'very strong'
