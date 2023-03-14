@@ -13,6 +13,7 @@ References:
     https://en.wikipedia.org/wiki/Password_strength
     stratford career institute-13
 """
+
 import math
 import string
 def get_password():
@@ -27,7 +28,12 @@ def get_password():
     if password == "":
         return None
     else:
-        return password
+        with open("file.txt") as f:
+            if password in f.read():
+                print("Password has been use. Please choose another password.")
+                return get_password()
+            else:
+                return password
 
 
 def calculate_entropy(password):
@@ -68,7 +74,7 @@ def calculate_entropy(password):
         character_size += len(string.digits)
     
     # Calculate the entropy using the formula E = log2(RL)
-    entropy = math.log2(number_possible_character ** length)
+    entropy = math.log2(character_size ** length)
     
     # Determine password strength based on entropy
     if entropy <= 28 :
@@ -81,15 +87,15 @@ def calculate_entropy(password):
         return 'very strong'
         
 
-def read_file():
+def read_file(filename):
     """Reads filename and displays the file contents.
     Args:
         filename (string): Filename to open and read.
     Returns:
         None
     """
-    with open("file.txt", "r") as file:
-        print(file.read().splitlines())
+    with open(filename, "r") as file:
+        print(file.read())
 
 
 def append_file(filename, password):
@@ -116,7 +122,7 @@ def main():  # pragma: no cover
         entropy = calculate_entropy(password)
         print(f"Password strength: {entropy}")
 
-        read_file()
+        read_file(filename)
         append_file(filename, password)
 
 
