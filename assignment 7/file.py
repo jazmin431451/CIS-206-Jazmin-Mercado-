@@ -45,7 +45,6 @@ def calculate_entropy(password):
     """
     length = len(password)
     character = string.digits + string.ascii_uppercase + string.ascii_lowercase + string.punctuation
-    number_possible_character = len(character)
     
     # Check if password contains at least one uppercase, lowercase, punctuation, and digit character
     uppercase = False
