@@ -81,15 +81,15 @@ def calculate_entropy(password):
         return 'very strong'
         
 
-def read_file(filename):
+def read_file():
     """Reads filename and displays the file contents.
     Args:
         filename (string): Filename to open and read.
     Returns:
         None
     """
-    with open(filename, "r") as file:
-        print(file.read())
+    with open("file.txt", "r") as file:
+        print(file.read().splitlines())
 
 
 def append_file(filename, password):
@@ -116,7 +116,7 @@ def main():  # pragma: no cover
         entropy = calculate_entropy(password)
         print(f"Password strength: {entropy}")
 
-        read_file(filename)
+        read_file()
         append_file(filename, password)
 
 
