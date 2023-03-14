@@ -23,4 +23,4 @@ def test_calculate_entropy():
     assert file.calculate_entropy("j") == "weak"
     assert file.calculate_entropy("Isum4") == "medium"
     assert file.calculate_entropy("jelly22") == "strong"
-    assert file.calculate_entropy("jelly22fish") == "very strong"
+    assert file.calculate_entropy("Jelly22Fi$h") == "very strong"
