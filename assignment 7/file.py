@@ -16,6 +16,7 @@ References:
 
 import math
 import string
+import os
 def get_password():
     """get the user enter the password.
     Args:
@@ -96,7 +97,6 @@ def read_file(filename):
     with open(filename, "r") as file:
         print(file.read())
 
-
 def append_file(filename, password):
     """Appends the password to the file.
     Args:
@@ -112,18 +112,21 @@ def append_file(filename, password):
 def main():  # pragma: no cover
     """Runs the main program logic."""
     filename = "file.txt"
+    password_test = "10-million-password-list-top-1000000.txt"
 
     while True:
         password = get_password()
         if not password:
             break
-
+        # Check if the password already exists in the password_test
+        if os.path.isfile(password_test):
+            print("File '%s' already exists." % password_test)
+            exit()
         entropy = calculate_entropy(password)
         print(f"Password strength: {entropy}")
 
         read_file(filename)
         append_file(filename, password)
-
 
 if __name__ == "__main__":  # pragma: no cover
     main()
