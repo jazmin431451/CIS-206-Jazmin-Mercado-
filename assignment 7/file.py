@@ -41,7 +41,7 @@ def calculate_entropy(password):
     Args:
         password (string): Password to calculate entropy for.
     Returns:
-        float: Entropy of the password strength.
+        str: Strength of the password ("weak", "medium", "strong", or "very strong").
     """
     length = len(password)
     character = string.digits + string.ascii_uppercase + string.ascii_lowercase + string.punctuation
@@ -51,14 +51,14 @@ def calculate_entropy(password):
     lowercase = False
     punctuation = False
     digit = False
-    for character in password:
-        if character in string.ascii_uppercase:
+    for character  in password:
+        if character  in string.ascii_uppercase:
             uppercase = True
-        elif character in string.ascii_lowercase:
+        elif character  in string.ascii_lowercase:
             lowercase = True
-        elif character in string.punctuation:
+        elif character  in string.punctuation:
             punctuation = True
-        elif character in string.digits:
+        elif character  in string.digits:
             digit = True
     
     # Determine the size of the character set to be used in entropy calculation
